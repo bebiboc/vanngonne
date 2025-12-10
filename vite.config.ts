@@ -4,6 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // Trigger redeploy: ensure correct base path for GitHub Pages
+// Redeploy: trivial change for workflow
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
