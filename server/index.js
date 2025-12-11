@@ -48,3 +48,16 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Contacts server listening on http://localhost:${PORT}`);
 });
+
+// Endpoint to view all contacts
+app.get("/api/contacts", async (req, res) => {
+  try {
+    ensureDataFile();
+    const raw = await fsPromises.readFile(DATA_FILE, "utf8");
+    const list = JSON.parse(raw || "[]");
+    res.json(list);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ ok: false, message: "failed to read contacts" });
+  }
+});
