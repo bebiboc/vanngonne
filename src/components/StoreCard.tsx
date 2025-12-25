@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Clock, MapPin, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -5,20 +6,23 @@ interface StoreCardProps {
   id: string;
   name: string;
   category: string;
-  image: string;
+  images?: string[];
+  categoryId?: string;
+  emoji?: string;
   rating: number;
   distance: string;
   pickupTime: string;
   originalPrice: number;
   discountPrice: number;
   itemsLeft: number;
+  itemType?: string;
 }
 
 const StoreCard = ({
   id,
   name,
   category,
-  image,
+  images = [],
   rating,
   distance,
   pickupTime,
@@ -27,6 +31,7 @@ const StoreCard = ({
   itemsLeft,
 }: StoreCardProps) => {
   const navigate = useNavigate();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const vnd = new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND", maximumFractionDigits: 0 });
 
@@ -34,22 +39,51 @@ const StoreCard = ({
     navigate("/coming-soon", { state: { source: `store:${id}` } });
   };
 
+  useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [images]);
+
+  const hasImages = images.length > 0;
+  const activeImage = hasImages ? images[currentImageIndex] : "";
+
+  const handlePrevImage = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    setCurrentImageIndex(prev => (prev - 1 + images.length) % images.length);
+  };
+
+  const handleNextImage = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    setCurrentImageIndex(prev => (prev + 1) % images.length);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleClick();
+    }
+  };
+  
+  const showCarouselControls = images.length > 1;
+
   return (
-    <button
+    <article
       onClick={handleClick}
-      className="group bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2 text-left w-full"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      className="group bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2 text-left w-full focus:outline-none focus:ring-2 focus:ring-primary"
     >
       <div className="relative h-40 bg-muted overflow-hidden">
-        {image ? (
+        {hasImages ? (
           <img
-            src={image}
-            alt={name}
+            src={activeImage}
+            alt={`${name} photo ${currentImageIndex + 1}`}
             loading="lazy"
             className="absolute inset-0 w-full h-full object-cover"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-6xl bg-gradient-to-br from-muted to-muted/50">
-            {image}
+            {name.charAt(0)}
           </div>
         )}
         <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-card/90 backdrop-blur-sm text-xs font-medium text-foreground">
@@ -59,6 +93,34 @@ const StoreCard = ({
           <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-bold">
             Only {itemsLeft} left!
           </div>
+        )}
+        {showCarouselControls && (
+          <>
+            <button
+              type="button"
+              className="absolute left-3 top-1/2 -translate-y-1/2 bg-card/80 backdrop-blur-sm rounded-full p-1.5 text-foreground hover:bg-card focus:outline-none focus:ring-1 focus:ring-primary"
+              onClick={handlePrevImage}
+              aria-label="View previous photo"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 -translate-y-1/2 bg-card/80 backdrop-blur-sm rounded-full p-1.5 text-foreground hover:bg-card focus:outline-none focus:ring-1 focus:ring-primary"
+              onClick={handleNextImage}
+              aria-label="View next photo"
+            >
+              ›
+            </button>
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+              {images.map((_, index) => (
+                <span
+                  key={index}
+                  className={`h-1.5 w-1.5 rounded-full ${index === currentImageIndex ? "bg-primary" : "bg-card/70"}`}
+                />
+              ))}
+            </div>
+          </>
         )}
       </div>
 
@@ -96,7 +158,7 @@ const StoreCard = ({
           </span>
         </div>
       </div>
-    </button>
+    </article>
   );
 };
 
