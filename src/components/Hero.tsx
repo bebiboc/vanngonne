@@ -50,7 +50,7 @@ const Hero = () => {
   // Vietnamese phone: starts with 0, 10 digits, or +84 and 9 digits
   // Vietnamese phone: starts with 0 or +84, followed by 3,5,7,8,9 and 8 digits
   // Valid prefixes: 03, 05, 07, 08, 09 or +843, +845, +847, +848, +849
-  function isValidVietnamesePhone(phone) {
+  function isValidVietnamesePhone(phone: string) {
     return /^((\+84|0)(3|5|7|8|9)\d{8})$/.test(phone);
   }
 
@@ -96,16 +96,20 @@ const Hero = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight text-balance">
-              Cứu thực phẩm,{" "}
-              <span className="text-secondary">cứu đất nước</span>
+              Mua thực phẩm ngon,{" "}
+              <span className="text-secondary">rẻ hơn đến 70%</span>
             </h1>
             
             <p className="text-lg md:text-xl text-primary-foreground/80 max-w-lg">
-              Giải cứu thực phẩm cuối ngày — từ rau, thịt, hoa quả đến bánh ngọt — tại các quán bạn yêu thích, với mức giá rẻ hơn đến 70%, đồng thời chung tay giảm lãng phí thực phẩm.
+              Giải cứu thực phẩm cuối ngày — từ rau, thịt, hoa quả đến bánh ngọt — từ các quán bạn yêu thích tại Hà Nội, đồng thời chung tay giảm lãng phí thực phẩm.
+            </p>
+
+             <p className="text-lg md:text-xl text-primary-foreground/80 max-w-lg added">
+              Mỗi túi bất ngờ bạn mua = 1 phần thực phẩm không bị bỏ đi 🌱
             </p>
 
             <p className="text-lg md:text-xl text-primary-foreground/80 max-w-lg mt-4">
-              Đăng ký ngay để nhận thông báo khi chúng mình chính thức ra mắt vào tháng 01 năm 2026!
+              Đăng ký ngay để nhận thông báo qua Zalo khi chúng mình ra mắt thử nghiệm vào tháng 01 năm 2026 — số lượng người dùng giới hạn!
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">

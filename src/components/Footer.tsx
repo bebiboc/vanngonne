@@ -29,7 +29,7 @@ const Footer = () => {
         </div>
 
         <div className="pt-6 border-t border-background/10 mt-6">
-          <p className="text-sm text-background/60">© 2025 Vẫn Ngon. Bảo lưu mọi quyền.</p>
+          <p className="text-sm text-background/60">© 2026 Vẫn Ngon. Bảo lưu mọi quyền.</p>
         </div>
       </div>
     </footer>

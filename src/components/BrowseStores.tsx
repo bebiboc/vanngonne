@@ -62,7 +62,7 @@ const stores = [
     pickupTime: "8:00 PM - 9:30 PM",
     originalPrice: 160000,
     discountPrice: 50000,
-    itemsLeft: 3,
+    itemsLeft: 5,
     itemType: "Nguyên liệu tươi sống: trái cây, rau củ, thịt",
   },
   {

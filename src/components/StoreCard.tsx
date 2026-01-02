@@ -142,7 +142,7 @@ const StoreCard = ({
 
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
           <Clock className="w-4 h-4" />
-          <span>Pickup: {pickupTime}</span>
+          <span>Giờ lấy: {pickupTime}</span>
         </div>
 
         <div className="flex items-center justify-between pt-3 border-t border-border">
@@ -151,7 +151,7 @@ const StoreCard = ({
             <span className="text-sm text-muted-foreground line-through">{vnd.format(originalPrice)}</span>
           </div>
           <span className="px-3 py-1.5 rounded-lg bg-primary/10 text-primary text-sm font-semibold">
-            {Math.round((1 - discountPrice / originalPrice) * 100)}% off
+            Giảm {Math.round((1 - discountPrice / originalPrice) * 100)}%
           </span>
         </div>
       </div>

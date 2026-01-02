@@ -78,7 +78,7 @@ const ComingSoon = () => {
   // Vietnamese phone: starts with 0, 10 digits, or +84 and 9 digits
   // Vietnamese phone: starts with 0 or +84, followed by 3,5,7,8,9 and 8 digits
   // Valid prefixes: 03, 05, 07, 08, 09 or +843, +845, +847, +848, +849
-  function isValidVietnamesePhone(phone) {
+  function isValidVietnamesePhone(phone: string) {
     return /^((\+84|0)(3|5|7|8|9)\d{8})$/.test(phone);
   }
 
@@ -177,7 +177,11 @@ const ComingSoon = () => {
             </p>
           ) : (
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-md mx-auto">
-              Hãy là những người đầu tiên tiết kiệm thực phẩm ngon và giảm lãng phí ở Hà Nội. Nhập số điện thoại để nhận thông báo khi chúng tôi ra mắt.
+              ⚠️ Các túi hiển thị chỉ là ví dụ — hiện tại bạn cần đăng ký để được mở quyền mua khi ra mắt.
+
+              Số lượng người dùng giới hạn! Hãy là những người đầu tiên tiết kiệm thực phẩm ngon và giảm lãng phí ở Hà Nội. 
+              
+              Nhập số điện thoại để nhận thông báo qua Zalo khi chúng tôi ra mắt.
             </p>
           )}
 
@@ -212,7 +216,7 @@ const ComingSoon = () => {
                   />
                 </div>
                 <Button type="submit" variant="warm" size="lg" disabled={!phone || !isValidVietnamesePhone(phone)}>
-                  {isEditing ? "Cập nhật" : "Thông báo cho tôi"}
+                  {isEditing ? "Cập nhật" : "Đăng ký"}
                 </Button>
               </div>
             </form>
@@ -268,7 +272,7 @@ const ComingSoon = () => {
       {/* Footer */}
       <footer className="container py-6 text-center">
         <p className="text-sm text-primary-foreground/60">
-          © 2025 Vẫn Ngon. Cùng chống lãng phí thực phẩm.
+          © 2026 Vẫn Ngon. Cùng chống lãng phí thực phẩm.
         </p>
       </footer>
     </div>
